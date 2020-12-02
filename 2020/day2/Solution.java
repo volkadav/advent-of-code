@@ -42,7 +42,6 @@ class Solution {
 
       System.out.println(validPasswords);
     } catch (Exception e) {
-      System.err.println(e.getMessage());
       e.printStackTrace();
       System.exit(1);
     }
