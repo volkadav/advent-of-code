@@ -7,7 +7,7 @@ class Solution {
 
     for (int i = 0; i < map.size(); i += downwardStep) { // i is line in map
       String mapLine = map.get(i);
-      char sym = mapLine.charAt((i * rightwardSlope) % mapLine.length());
+      char sym = mapLine.charAt(((i * rightwardSlope)/downwardStep) % mapLine.length());
 
       if (sym == '#') {
         trees++;
@@ -49,11 +49,6 @@ class Solution {
         System.out.println(trees31);
         break;
       case '2':
-        System.out.printf("1,1: %d\n", (long)trees(map, 1, 1));
-        System.out.printf("3,1: %d\n", (long)trees31);
-        System.out.printf("5,1: %d\n", (long)trees(map, 5, 1));
-        System.out.printf("7,1: %d\n", (long)trees(map, 7, 1));
-        System.out.printf("1,2: %d\n", (long)trees(map, 1, 2));
         System.out.println((long)trees(map, 1, 1) *
                            (long)trees31 *
                            (long)trees(map, 5, 1) *
