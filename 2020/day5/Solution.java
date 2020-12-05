@@ -3,33 +3,17 @@ import java.util.*;
 
 class Solution {
   public static int seatRow(String rowCode) {
-    int row = 0;
-    for (Character c : rowCode.toCharArray()) {
-      switch (c) {
-        case 'F':
+    rowCode = rowCode.replaceAll("F","0");
+    rowCode = rowCode.replaceAll("B","1");
 
-          break;
-        case 'B':
-
-          break;
-      }
-    }
-    return row;
+    return Integer.parseInt(rowCode, 2);
   }
 
-  public static int seatColumn(String colCode) {
-    int minCol = 0, maxCol = 7;
-    for (Character c : colCode.toCharArray()) {
-      switch (c) {
-        case 'R':
-          
-          break;
-        case 'L':
+  public static int seatCol(String colCode) {
+    colCode = colCode.replaceAll("L","0");
+    colCode = colCode.replaceAll("R","1");
 
-          break;
-      }
-    }
-    return col;
+    return Integer.parseInt(colCode, 2);
   }
   
   public static int seatID(String seatCode) {
@@ -62,7 +46,7 @@ class Solution {
         int highestSeatID = -1;
         
         try {
-          BufferedReader in = new BufferedReader(new FileReader(args[0]));
+          BufferedReader in = new BufferedReader(new FileReader(args[1]));
           String line = in.readLine();
           while (line != null) {
             int seatID = seatID(line);
