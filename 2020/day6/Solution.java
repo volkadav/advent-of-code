@@ -22,20 +22,18 @@ class Solution {
     try {
       BufferedReader in = new BufferedReader(new FileReader(args[1]));
       String line = in.readLine();
+      int sum = 0; // sum of the cardinalities of the answer sets
+      Set<Character> answerSet = new HashSet<>();
 
       switch (step) {
         case '1':
-          int sum = 0; // sum of the cardinalities of the answer sets
-          Set<Character> answerSet = new HashSet<>();
           while (line != null) {
             if (line.matches("^\\s*$")) { // blank line = terminate group
               sum += answerSet.size();
               answerSet.clear();
             } else {
               for (Character c : line.toCharArray()) {
-                if (!answerSet.contains(c)) {
-                  answerSet.add(c);
-                }
+                answerSet.add(c);
               }
             }
             line = in.readLine();
@@ -47,6 +45,14 @@ class Solution {
           System.out.println(sum);
           break;
         case '2':
+          while (line != null) {
+            if (line.matches("^\\s*$")) {
+            } else {
+            }
+            line = in.readLine();
+          }
+
+          System.out.println(sum);
           break;
       }
     } catch (Exception e) {
