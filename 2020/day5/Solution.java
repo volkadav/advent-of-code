@@ -41,13 +41,14 @@ class Solution {
         System.exit(1);
     }
 
-    switch (step) {
-      case '1':
-        int highestSeatID = -1;
-        
-        try {
-          BufferedReader in = new BufferedReader(new FileReader(args[1]));
-          String line = in.readLine();
+    try {
+      BufferedReader in = new BufferedReader(new FileReader(args[1]));
+      String line = in.readLine();
+
+      switch (step) {
+        case '1':
+          int highestSeatID = -1;
+
           while (line != null) {
             int seatID = seatID(line);
             if (seatID > highestSeatID) {
@@ -55,15 +56,28 @@ class Solution {
             }
             line = in.readLine();
           }
-        } catch (Exception e) {
-          e.printStackTrace();
-          System.exit(1);
-        }
 
-        System.out.println(highestSeatID);
-        break;
-      case '2':
-        break;
+          System.out.println(highestSeatID);
+          break;
+        case '2':
+          List<Integer> seatIDs = new ArrayList<>();
+          while (line != null) {
+            seatIDs.add(seatID(line));
+            line = in.readLine();
+          }
+          Collections.sort(seatIDs);
+
+          for (int i = 0; i < seatIDs.size() - 2; i++) {
+            if ((seatIDs.get(i)) + 2 != seatIDs.get(i + 2)) { // found a gap in the middle
+              System.out.println(seatIDs.get(i) + 1); // id of only empty seat
+            }
+          }
+
+          break;
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+      System.exit(1);
     }
   }
 }
