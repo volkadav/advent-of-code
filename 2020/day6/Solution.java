@@ -45,12 +45,35 @@ class Solution {
           System.out.println(sum);
           break;
         case '2':
+          boolean groupStarted = false;
+          Set<Character> groupAnswers = new HashSet<>();
+
           while (line != null) {
             if (line.matches("^\\s*$")) {
+              // finish group
+              sum += groupAnswers.size();
+              groupAnswers.clear();
+              groupStarted = false;
             } else {
+              // in a group
+              if (!groupStarted) {
+                // this is the start of the group
+                groupStarted = true;
+                for (Character c : line.toCharArray()) {
+                  groupAnswers.add(c);
+                }
+              } else {
+                // not at the start of a group
+                Set<Character> newAnswers = new HashSet<>();
+                for (Character c : line.toCharArray()) {
+                  newAnswers.add(c);
+                }
+                groupAnswers.retainAll(newAnswers);
+              }
             }
             line = in.readLine();
           }
+          sum += groupAnswers.size();
 
           System.out.println(sum);
           break;
