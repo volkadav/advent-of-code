@@ -24,9 +24,8 @@ class Solution {
     try {
       BufferedReader in = new BufferedReader(new FileReader(args[1]));
       String line = in.readLine();
-      Pattern bagInfoPattern = Pattern.compile("^(\\d+) (\\w+ \\w+) bag.*");
+      Pattern bagInfoPattern = Pattern.compile("^\\s*(\\d+)\\s+(\\w+\\s+\\w+)\\s+bag.*");
       while (line != null) {
-        System.out.println(line);
         String[] bagSubstrs = line.split(" bags contain ");
         String bagType = bagSubstrs[0];
 
@@ -35,8 +34,8 @@ class Solution {
         } else {
           Map<String, Integer> innerBags = new HashMap<>(); // map of inner bag type to allowed count
           for (String innerBagInfo : bagSubstrs[1].split(",")) {
-            System.out.println(innerBagInfo);
             Matcher m = bagInfoPattern.matcher(innerBagInfo);
+            if (!m.find()) { throw new Exception("wat"); }
             innerBags.put(m.group(2), Integer.parseInt(m.group(1)));
           }
           bagInfo.put(bagType, innerBags);
